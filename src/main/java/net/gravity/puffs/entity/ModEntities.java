@@ -52,6 +52,14 @@ public class ModEntities {
                             .fireImmune()
                             .build(new ResourceLocation(PuffsMain.MOD_ID, "waterpuff").toString()));
 
+    public static final RegistryObject<EntityType<Obsidianpuff>> OBSIDIANPUFF =
+            ENTITY_TYPES.register("obsidianpuff",
+                    () -> EntityType.Builder.of(Obsidianpuff::new, MobCategory.CREATURE)
+                            .sized(0.35F, 0.4F)
+                            .clientTrackingRange(8)
+                            .fireImmune()
+                            .build(new ResourceLocation(PuffsMain.MOD_ID, "obsidianpuff").toString()));
+
     public static final RegistryObject<EntityType<Bomb>> BOMB =
             ENTITY_TYPES.register("bomb",
                     () -> EntityType.Builder.<Bomb>of(Bomb::new, MobCategory.MISC)

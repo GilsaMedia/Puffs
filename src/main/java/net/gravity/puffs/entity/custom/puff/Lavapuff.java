@@ -15,6 +15,7 @@ import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.Vec3;
@@ -22,6 +23,9 @@ import net.minecraft.world.phys.Vec3;
 import java.util.EnumSet;
 
 public class Lavapuff extends Puff {
+    private int rainTime = 0;
+    private static final int MAX_RAIN_TIME = 100; // 5 seconds at 20 ticks per second
+    
     public Lavapuff(EntityType<? extends Lavapuff> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setPathfindingMalus(BlockPathTypes.WATER, -2.0F);
@@ -43,12 +47,12 @@ public class Lavapuff extends Puff {
 
     @Override
     public ItemStack initializeTameItem() {
-        return ItemStack.EMPTY;
+        return new ItemStack(Items.LAVA_BUCKET);
     }
 
     @Override
     public boolean isTamable() {
-        return false;
+        return true;
     }
 
     @Override
@@ -75,8 +79,21 @@ public class Lavapuff extends Puff {
                 this.level.addParticle(ParticleTypes.DRIPPING_LAVA, this.getRandomX(0.5D), this.getRandomY() - 0.25D, this.getRandomZ(0.5D), (this.random.nextDouble() - 0.5D) * 2.0D, -this.random.nextDouble(), (this.random.nextDouble() - 0.5D) * 2.0D);
             }
         } else {
-            if (isInWaterOrRain()) {
-                hurt(DamageSource.DROWN, 1);
+            // Check if in water (not just rain)
+            if (this.isInWater()) {
+                this.hurt(DamageSource.DROWN, 2.0F);
+            }
+            
+            // Track rain time and damage if in rain too long (but not in water, as that's handled separately)
+            if (this.level.isRainingAt(this.blockPosition()) && !this.isInWater()) {
+                this.rainTime++;
+                if (this.rainTime >= MAX_RAIN_TIME) {
+                    this.hurt(DamageSource.DROWN, 1.0F);
+                    this.rainTime = 0; // Reset counter after damage
+                }
+            } else {
+                // Reset rain time when not in rain
+                this.rainTime = 0;
             }
         }
 

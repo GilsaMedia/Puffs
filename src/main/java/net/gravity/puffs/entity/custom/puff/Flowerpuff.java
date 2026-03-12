@@ -126,7 +126,7 @@ public class Flowerpuff extends Puff {
         if (itemstack.is(Items.FLOWER_POT) && !hasPot()) {
             this.repairPot();
             if (!this.level.isClientSide) {
-                if(pPlayer.getAbilities().instabuild) {
+                if (!pPlayer.getAbilities().instabuild) {
                     itemstack.shrink(1);
                 }
             }
@@ -163,10 +163,10 @@ public class Flowerpuff extends Puff {
         if(!pCompound.contains("Disguised")) {
             pCompound.putBoolean("Disguised", this.entityData.get(DATA_IS_DISGUISED));
         }
-        if(!pCompound.contains("Disguised")) {
+        if(!pCompound.contains("Pot")) {
             pCompound.putBoolean("Pot", this.entityData.get(DATA_HAS_POT));
         }
-        if(!pCompound.contains("Disguised")) {
+        if(!pCompound.contains("Type")) {
             pCompound.putString("Type", this.entityData.get(DATA_TYPE));
         }
     }
@@ -252,7 +252,7 @@ public class Flowerpuff extends Puff {
 
         public static FlowerType randomFlower()  {
             FlowerType[] flowers = values();
-            return flowers[random.nextInt(flowers.length - 1)];
+            return flowers[random.nextInt(flowers.length)];
         }
 
         FlowerType(String type, ItemStack itemStack) {

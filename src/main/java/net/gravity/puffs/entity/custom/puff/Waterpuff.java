@@ -12,6 +12,7 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 
@@ -27,7 +28,7 @@ public class Waterpuff extends Puff implements RangedAttackMob {
 
     @Override
     public ItemStack initializeTameItem() {
-        return ItemStack.EMPTY;
+        return new ItemStack(Items.WATER_BUCKET);
     }
 
     @Override
@@ -37,12 +38,13 @@ public class Waterpuff extends Puff implements RangedAttackMob {
 
     @Override
     public boolean isTamable() {
-        return false;
+        return true;
     }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.25D, 10, 15.0F));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, net.gravity.puffs.entity.custom.puff.Lavapuff.class, 10, true, true, null));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, 10 ,true, true, Entity::isOnFire));
         super.registerGoals();
     }
@@ -78,7 +80,6 @@ public class Waterpuff extends Puff implements RangedAttackMob {
     }
 
     static class WaterpuffNearestAttackableTargetGoal extends NearestAttackableTargetGoal<Player>{
-        Player player = (Player) this.mob.getTarget();
         WaterpuffNearestAttackableTargetGoal(Waterpuff pMob) {
             super(pMob, Player.class, true, true);
         }
@@ -88,6 +89,7 @@ public class Waterpuff extends Puff implements RangedAttackMob {
          * method as well.
          */
         public boolean canUse() {
+            Player player = (Player) this.mob.getTarget();
             return player != null && player.isOnFire() && super.canUse();
         }
 
@@ -95,7 +97,8 @@ public class Waterpuff extends Puff implements RangedAttackMob {
          * Returns whether an in-progress EntityAIBase should continue executing
          */
         public boolean canContinueToUse() {
-            if (player.isOnFire() && player != null) {
+            Player player = (Player) this.mob.getTarget();
+            if (player != null && player.isOnFire()) {
                 return super.canContinueToUse();
             } else {
                 this.targetMob = null;

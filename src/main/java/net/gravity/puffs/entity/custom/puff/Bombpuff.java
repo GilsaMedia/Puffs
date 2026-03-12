@@ -42,7 +42,7 @@ public class Bombpuff extends Puff implements PowerableMob {
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if(pSource == DamageSource.ON_FIRE || pSource == DamageSource.IN_FIRE || pSource == DamageSource.LAVA && hasRoot()) {
+        if((pSource == DamageSource.ON_FIRE || pSource == DamageSource.IN_FIRE || this.isInLava()) && hasRoot()) {
             clearFire();
             ignite();
             return false;
@@ -53,8 +53,8 @@ public class Bombpuff extends Puff implements PowerableMob {
 
     @Override
     public void registerGoals() {
-        this.goalSelector.addGoal(2, new BombpuffRunAroundLikeCrazyGoal(this, 2f));
         super.registerGoals();
+        this.goalSelector.addGoal(1, new BombpuffRunAroundLikeCrazyGoal(this, 2f));
     }
 
     protected void defineSynchedData() {
@@ -102,6 +102,11 @@ public class Bombpuff extends Puff implements PowerableMob {
 
     public void tick() {
         if (this.isAlive()) {
+            // Check if moving through fire
+            if (this.isOnFire() && hasRoot() && !this.isIgnited()) {
+                this.ignite();
+            }
+            
             this.oldFuseTime = this.fuseTime;
             if (this.isIgnited() && hasRoot()) {
                 this.setSwellDir(1);
@@ -221,5 +226,17 @@ public class Bombpuff extends Puff implements PowerableMob {
 
     public void ignite() {
         this.entityData.set(DATA_IS_IGNITED, true);
+    }
+
+    @Override
+    public void die(DamageSource pCause) {
+        // Explode if killed by fall damage and has root
+        if (pCause == DamageSource.FALL && hasRoot()) {
+            if (!this.level.isClientSide) {
+                this.explodeBombpuff();
+            }
+            return;
+        }
+        super.die(pCause);
     }
 }

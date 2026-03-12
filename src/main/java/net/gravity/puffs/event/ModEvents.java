@@ -5,6 +5,7 @@ import net.gravity.puffs.entity.ModEntities;
 import net.gravity.puffs.entity.client.*;
 import net.gravity.puffs.entity.custom.jumbopuff.JumboPuff;
 import net.gravity.puffs.entity.custom.puff.Lavapuff;
+import net.gravity.puffs.entity.custom.puff.Obsidianpuff;
 import net.gravity.puffs.entity.custom.puff.Puff;
 import net.gravity.puffs.item.ModItems;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -43,6 +44,7 @@ public class ModEvents {
                 event.put(ModEntities.FLOWERPUFF.get(), Puff.setAttributes());
                 event.put(ModEntities.LAVAPUFF.get(), Lavapuff.setAttributes());
                 event.put(ModEntities.WATERPUFF.get(), Puff.setAttributes());
+                event.put(ModEntities.OBSIDIANPUFF.get(), Obsidianpuff.setAttributes());
                 event.put(ModEntities.JUMBO_CHORUPUFF.get(), JumboPuff.setAttributes());
             }
         }

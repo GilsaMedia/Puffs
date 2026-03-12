@@ -86,12 +86,12 @@ public class JumboChorupuff extends JumboPuff {
     private boolean teleport(double pX, double pY, double pZ) {
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos(pX, pY, pZ);
 
-        while(blockpos$mutableblockpos.getY() > this.level.getMinBuildHeight() && !this.level.getBlockState(blockpos$mutableblockpos).getMaterial().blocksMotion()) {
+        while(blockpos$mutableblockpos.getY() > this.level.getMinBuildHeight() && this.level.getBlockState(blockpos$mutableblockpos).isAir()) {
             blockpos$mutableblockpos.move(Direction.DOWN);
         }
 
         BlockState blockstate = this.level.getBlockState(blockpos$mutableblockpos);
-        boolean flag = blockstate.getMaterial().blocksMotion();
+        boolean flag = !blockstate.isAir();
         boolean flag1 = blockstate.getFluidState().is(FluidTags.WATER);
         if (flag && !flag1) {
             net.minecraftforge.event.entity.EntityTeleportEvent.EnderEntity event = net.minecraftforge.event.ForgeEventFactory.onEnderTeleport(this, pX, pY, pZ);

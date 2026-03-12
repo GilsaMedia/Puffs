@@ -4,6 +4,7 @@
   "item.puffs.flowerpuff_spawn_egg": "Flowerpuff Spawn Egg",
   "item.puffs.lavapuff_spawn_egg": "Lavapuff Spawn Egg",
   "item.puffs.waterpuff_spawn_egg": "Waterpuff Spawn Egg",
+  "item.puffs.obsidianpuff_spawn_egg": "Obsidianpuff Spawn Egg",
 
   "item.puffs.jumbo_chorupuff_spawn_egg": "Jumbo Chorupuff Spawn Egg",
 
@@ -11,6 +12,7 @@
   "item.puffs.bombpuff_root": "Bombpuff Root",
   "item.puffs.lavapuff_root": "Lavapuff Root",
   "item.puffs.waterpuff_root": "Waterpuff Root",
+  "item.puffs.obsidianpuff_root": "Obsidianpuff Root",
   "item.puffs.flowerpuff_poppy_root": "Flowerpuff Poppy Root",
   "item.puffs.flowerpuff_allium_root": "Flowerpuff Allium Root",
   "item.puffs.flowerpuff_azure_bluet_root": "Flowerpuff Azure Bluet Root",
@@ -32,6 +34,7 @@
   "entity.puffs.flowerpuff": "Flowerpuff",
   "entity.puffs.lavapuff": "Lavapuff",
   "entity.puffs.waterpuff": "Waterpuff",
+  "entity.puffs.obsidianpuff": "Obsidianpuff",
 
   "entity.puffs.jumbo_chorupuff": "Jumbo Chorupuff",
 

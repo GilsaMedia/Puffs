@@ -57,6 +57,7 @@ public class PuffsMain {
             EntityRenderers.register(ModEntities.FLOWERPUFF.get(), PuffRenderer::new);
             EntityRenderers.register(ModEntities.LAVAPUFF.get(), PuffRenderer::new);
             EntityRenderers.register(ModEntities.WATERPUFF.get(), PuffRenderer::new);
+            EntityRenderers.register(ModEntities.OBSIDIANPUFF.get(), PuffRenderer::new);
             EntityRenderers.register(ModEntities.BOMB.get(), ThrownItemRenderer::new);
             EntityRenderers.register(ModEntities.WATER_PROJECTILE.get(), WaterProjectileRenderer::new);
             EntityRenderers.register(ModEntities.JUMBO_CHORUPUFF.get(), JumboPuffRenderer::new);

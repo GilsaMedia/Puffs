@@ -4,6 +4,7 @@ import net.gravity.puffs.PuffsMain;
 import net.gravity.puffs.entity.custom.TamablePathfinderMob;
 import net.gravity.puffs.entity.custom.jumbopuff.JumboPuff;
 import net.gravity.puffs.entity.goals.PuffFollowOwnerGoal;
+import net.gravity.puffs.entity.goals.WildPuffPanicGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -52,6 +53,7 @@ public abstract class Puff extends TamablePathfinderMob {
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new WildPuffPanicGoal(this, 1.5D));
         this.goalSelector.addGoal(2, new PuffGrowRootGoal(this));
         if(this instanceof JumboPuff) {
             this.goalSelector.addGoal(3, new PuffFollowOwnerGoal(this, 1.55D, 4.3F, 3F, true));

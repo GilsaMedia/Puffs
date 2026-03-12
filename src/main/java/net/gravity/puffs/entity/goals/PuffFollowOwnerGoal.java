@@ -27,7 +27,7 @@ public class PuffFollowOwnerGoal extends Goal {
     private final float startDistance;
     private float oldWaterCost;
     private final boolean canFly;
-    private int randDis;
+    private int randDis = 0;
 
     public PuffFollowOwnerGoal(TamablePathfinderMob pTamable, double pSpeedModifier, float pStartDistance, float pStopDistance, boolean pCanFly) {
         this.tamable = pTamable;

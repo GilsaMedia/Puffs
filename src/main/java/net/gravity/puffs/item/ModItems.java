@@ -25,6 +25,8 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.LAVAPUFF, 13717260,15445830 , new Item.Properties().tab(ModCreativeTabs.PUFFS_TAB)));
     public static final RegistryObject<Item> WATERPUFF_SPAWN_EGG = ITEMS.register("waterpuff_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.WATERPUFF, 2314188,5931763 , new Item.Properties().tab(ModCreativeTabs.PUFFS_TAB)));
+    public static final RegistryObject<Item> OBSIDIANPUFF_SPAWN_EGG = ITEMS.register("obsidianpuff_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.OBSIDIANPUFF, 0x1a1a1a, 0x0a0a0a, new Item.Properties().tab(ModCreativeTabs.PUFFS_TAB)));
     public static final RegistryObject<Item> JUMBO_CHORUPUFF_SPAWN_EGG = ITEMS.register("jumbo_chorupuff_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.JUMBO_CHORUPUFF, 4661575,8149884, new Item.Properties().tab(ModCreativeTabs.JUMBO_PUFFS_TAB)));
     public static final RegistryObject<Item> BOMB = ITEMS.register("bomb",
@@ -39,6 +41,8 @@ public class ModItems {
     public static final RegistryObject<Item> LAVAPUFF_ROOT = ITEMS.register("lavapuff_root",
             () -> new PuffRootItem(new Item.Properties().tab(ModCreativeTabs.PUFFS_TAB)));
     public static final RegistryObject<Item> WATERPUFF_ROOT = ITEMS.register("waterpuff_root",
+            () -> new PuffRootItem(new Item.Properties().tab(ModCreativeTabs.PUFFS_TAB)));
+    public static final RegistryObject<Item> OBSIDIANPUFF_ROOT = ITEMS.register("obsidianpuff_root",
             () -> new PuffRootItem(new Item.Properties().tab(ModCreativeTabs.PUFFS_TAB)));
 
     static {

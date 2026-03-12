@@ -42,7 +42,8 @@ public class Bomb extends ThrowableItemProjectile {
         if (!this.level.isClientSide) {
             this.level.broadcastEntityEvent(this, (byte)3);
             this.discard();
-            level.explode(null, this.getX(), this.getY(), this.getZ(), 2, Explosion.BlockInteraction.BREAK);
+            Explosion.BlockInteraction explosion$blockinteraction = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this.getOwner()) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
+            level.explode(null, this.getX(), this.getY(), this.getZ(), 2, explosion$blockinteraction);
         }
     }
 }

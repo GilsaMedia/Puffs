@@ -83,9 +83,16 @@ public class WaterProjectile extends Projectile {
                 this.level.addParticle(ParticleTypes.SPLASH, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
             }
         }
-        if (entity instanceof LivingEntity && hitEntity.isOnFire()) {
-            hitEntity.clearFire();
-            this.playEntityOnFireExtinguishedSound();
+        if (!this.level.isClientSide) {
+            // Damage lavapuffs when hit by water
+            if (hitEntity instanceof net.gravity.puffs.entity.custom.puff.Lavapuff) {
+                hitEntity.hurt(DamageSource.DROWN, 2.0F);
+            }
+            // Extinguish fire on entities
+            if (entity instanceof LivingEntity && hitEntity.isOnFire()) {
+                hitEntity.clearFire();
+                this.playEntityOnFireExtinguishedSound();
+            }
         }
         discard();
     }
